@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Food Delivery Order Manager</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+        color: #34495e;
+        margin-bottom: 10px;
+    }
+
+    .section {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .section:hover {
+        transform: translateY(-2px);
+    }
+
+    input, select {
+        padding: 10px;
+        margin: 6px 5px;
+        width: 180px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 10px 16px;
+        margin: 6px 5px;
+        border: none;
+        border-radius: 6px;
+        background: linear-gradient(to right, #007bff, #0056b3);
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+        background: linear-gradient(to right, #0056b3, #003f7f);
+        transform: scale(1.05);
+    }
+
+    .delete-btn {
+        background: linear-gradient(to right, #e74c3c, #c0392b);
+        padding: 7px 12px;
+        font-size: 13px;
+    }
+
+    .delete-btn:hover {
+        background: linear-gradient(to right, #c0392b, #992d22);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    table th {
+        background: #007bff;
+        color: white;
+        padding: 12px;
+    }
+
+    table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    table tr:hover {
+        background-color: #eef4ff;
+    }
+
+    #output {
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 6px;
+        background: #e9f7ef;
+        color: #1e7e34;
+        border-left: 5px solid #28a745;
+    }
+
+    @media (max-width: 768px) {
+        input, select, button {
+            width: 100%;
+        }
+    }
+</style>
+
+
+</head>
+<body>
+
+<h2>🍔 Online Food Delivery Order Manager</h2>
+
+<!-- ADD ORDER -->
+<div class="section">
+    <h3>Add Order</h3>
+    Restaurant: <input id="restaurant" type="text">
+    Items: <input id="items" type="number">
+    Distance (KM): <input id="distance" type="number">
+    Paid:
+    <select id="paid">
+        <option value="true">Paid</option>
+        <option value="false">Unpaid</option>
+    </select>
+    <button onclick="addOrder()">Add Order</button>
+</div>
+
+<!-- FILTER & ASSIGN -->
+<div class="section">
+    <h3>Filter & Assign</h3>
+    Status:
+    <select id="filterStatus">
+        <option value="all">All</option>
+        <option value="paid">Paid</option>
+        <option value="unpaid">Unpaid</option>
+    </select>
+    Max Distance:
+    <input id="maxFilterDistance" type="number">
+    <button onclick="filterOrders()">Filter</button>
+    <button onclick="assignDelivery()">Assign Nearest Unpaid Order</button>
+</div>
+
+<!-- OUTPUT -->
+<div class="section">
+    <h3>Output</h3>
+    <div id="output">---</div>
+</div>
+
+<!-- ORDERS LIST -->
+<div class="section">
+    <h3>Orders List</h3>
+    <table>
+        <thead>
+           <tr>
+               <th>ID</th>
+               <th>Restaurant</th>
+               <th>Items</th>
+               <th>Paid</th>
+               <th>Distance (KM)</th>
+               <th>Action</th>
+           </tr>
+        </thead>
+
+        <tbody id="ordersTable"></tbody>
+    </table>
+</div>
+
+<script>
+let orders = [];
+let orderIdCounter = 1;
+
+function addOrder() {
+    const restaurant = document.getElementById("restaurant").value;
+    const items = Number(document.getElementById("items").value);
+    const distance = Number(document.getElementById("distance").value);
+    const paid = document.getElementById("paid").value === "true";
+
+    if (!restaurant || items <= 0 || distance <= 0) {
+        alert("Invalid input");
+        return;
+    }
+
+    orders.push({
+        orderId: orderIdCounter++,
+        restaurantName: restaurant,
+        itemCount: items,
+        isPaid: paid,
+        deliveryDistance: distance
+    });
+
+    renderOrders(orders);
+}
+
+
+function renderOrders(orderList) {
+    const table = document.getElementById("ordersTable");
+    table.innerHTML = "";
+
+    orderList.forEach(o => {
+        table.innerHTML += `
+            <tr>
+                <td>${o.orderId}</td>
+                <td>${o.restaurantName}</td>
+                <td>${o.itemCount}</td>
+                <td>${o.isPaid ? "Yes" : "No"}</td>
+                <td>${o.deliveryDistance}</td>
+                <td>
+                    <button class="delete-btn" onclick="removeOrder(${o.orderId})">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+function removeOrder(id) {
+    orders = orders.filter(order => order.orderId !== id);
+    renderOrders(orders);
+}
+
+function filterOrders() {
+    const status = document.getElementById("filterStatus").value;
+    const maxDist = Number(document.getElementById("maxFilterDistance").value);
+
+    let filtered = orders;
+
+    if (status === "paid") {
+        filtered = filtered.filter(o => o.isPaid);
+    } 
+    else if (status === "unpaid") {
+        filtered = filtered.filter(o => !o.isPaid);
+    }
+
+    if (maxDist > 0) {
+        filtered = filtered.filter(o => o.deliveryDistance <= maxDist);
+    }
+
+    renderOrders(filtered);
+}
+
+
+
+
+function assignDelivery() {
+    const maxDist = Number(document.getElementById("maxFilterDistance").value);
+    const output = document.getElementById("output");
+
+    const eligibleOrders = orders
+        .filter(o => !o.isPaid && o.deliveryDistance <= maxDist)
+        .sort((a, b) => a.deliveryDistance - b.deliveryDistance);
+
+    if (eligibleOrders.length === 0) {
+        output.innerText = "No order available";
+        output.style.color = "red";
+        return;
+    }
+
+    eligibleOrders[0].isPaid = true;
+
+    output.innerText =
+        `Order Assigned → ID: ${eligibleOrders[0].orderId},
+         Restaurant: ${eligibleOrders[0].restaurantName},
+         Distance: ${eligibleOrders[0].deliveryDistance} KM`;
+    output.style.color = "green";
+
+    renderOrders(orders);
+}
+
+</script>
+
+</body>
+</html>
