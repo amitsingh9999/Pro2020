@@ -1,0 +1,652 @@
+/* --- CSS Variables for Themes --- */
+:root {
+    /* Light Theme */
+    --primary-color: #007bff;
+    --secondary-color: #004d99;
+    --text-color: #333;
+    --background-color: #f4f4f9;
+    --light-section-bg: #f8f8fc;
+    --dark-section-bg: #004d99;
+    --dark-section-text: #fff;
+    --header-bg: #fff;
+    --header-border: #eee;
+    --card-bg: #fff;
+    --card-border: #ddd;
+    --drop-area-border: #007bff;
+    --drop-area-text: #333;
+    --input-bg: #fff;
+    --input-border: #ddd;
+    --footer-bg: #222;
+    --footer-text: #aaa;
+    --footer-link: #fff;
+    --button-primary-bg: #007bff;
+    --button-primary-hover: #0056b3;
+    --button-secondary-bg: #fff;
+    --button-secondary-text: #007bff;
+    --button-secondary-border: #007bff;
+}
+
+/* --- Dark Theme Overrides --- */
+body.dark-theme {
+    --primary-color: #66b3ff; /* Lighter blue for dark theme buttons */
+    --secondary-color: #1a75ff;
+    --text-color: #e0e0e0; /* Light text for dark background */
+    --background-color: #1a1a2e; /* Dark background */
+    --light-section-bg: #2a2a4a;
+    --dark-section-bg: #1a1a2e; /* Darker blue */
+    --dark-section-text: #e0e0e0;
+    --header-bg: #0f0f1d;
+    --header-border: #333;
+    --card-bg: #3a3a5a;
+    --card-border: #555;
+    --drop-area-border: #66b3ff;
+    --drop-area-text: #e0e0e0;
+    --input-bg: #2a2a4a;
+    --input-border: #555;
+    --footer-bg: #0f0f1d;
+    --footer-text: #b0b0b0;
+    --footer-link: #66b3ff;
+    --button-primary-bg: #66b3ff;
+    --button-primary-hover: #4d94ff;
+    --button-secondary-bg: #2a2a4a;
+    --button-secondary-text: #66b3ff;
+    --button-secondary-border: #66b3ff;
+}
+
+
+/* General Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+h1, h2, h3 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+body.dark-theme h1,
+body.dark-theme h2 {
+    color: var(--dark-section-text); /* Ensure hero and logo stay visible */
+}
+body.dark-theme h3 {
+    color: var(--dark-section-text); /* Ensure h3 are visible */
+}
+
+
+/* --- Buttons --- */
+.btn-primary {
+    display: inline-block;
+    background: var(--button-primary-bg);
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--button-primary-hover);
+}
+
+.btn-primary:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    display: inline-block;
+    background: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid var(--button-secondary-border);
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--button-secondary-text);
+    color: var(--button-secondary-bg);
+}
+
+/* --- Theme Toggle Button --- */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* subtle hover for light theme */
+}
+body.dark-theme .theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* subtle hover for dark theme */
+}
+
+
+/* --- Header & Nav --- */
+header {
+    background: var(--header-bg);
+    color: var(--secondary-color);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--header-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover:not(.btn-secondary) {
+    color: var(--primary-color);
+}
+
+/* Burger menu for mobile */
+.burger {
+    display: none; /* Hidden by default on desktop */
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+}
+
+.burger div {
+    width: 30px;
+    height: 3px;
+    background-color: var(--text-color); /* Burger lines adapt to theme */
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* --- Hero Section --- */
+.hero {
+    background: url('lung-background.jpg') no-repeat center center/cover;
+    background-color: var(--secondary-color);
+    color: var(--dark-section-text);
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: var(--dark-section-text); /* Always white/light for hero text */
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #ccc;
+}
+
+/* --- Section Styling --- */
+.section {
+    padding: 60px 0;
+}
+
+.section h3 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2em;
+}
+
+.section-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+.bg-light {
+    background-color: var(--light-section-bg);
+    transition: background-color 0.3s ease;
+}
+
+.bg-dark {
+    background-color: var(--dark-section-bg);
+    color: var(--dark-section-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bg-dark h3 {
+    color: var(--dark-section-text);
+}
+
+/* --- About Stats --- */
+.stat-boxes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    min-width: 250px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* --- Technology Grid --- */
+.tech-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.tech-item {
+    flex: 1;
+    min-width: 280px;
+    padding: 20px;
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.tech-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.citation {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-color);
+    margin-top: 20px;
+}
+
+/* --- Benefits List --- */
+.benefit-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.benefit-list li {
+    background: var(--card-bg);
+    padding: 20px;
+    border-left: 5px solid var(--primary-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* --- Diagnosis Upload Area --- */
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease;
+}
+
+.drop-area {
+    width: 100%;
+    padding: 40px 20px;
+    border: 2px dashed var(--drop-area-border);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: var(--drop-area-text);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.drop-area:hover {
+    background-color: rgba(0, 123, 255, 0.05); /* Light hover effect */
+}
+body.dark-theme .drop-area:hover {
+    background-color: rgba(102, 179, 255, 0.05); /* Dark theme hover effect */
+}
+
+
+.drop-area.highlight {
+    background-color: rgba(0, 123, 255, 0.1);
+    border-color: var(--primary-color);
+}
+
+.upload-link {
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.file-info {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 5px;
+}
+body.dark-theme .file-info {
+    color: #b0b0b0;
+}
+
+.image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    min-height: 150px;
+}
+
+#preview-img {
+    max-width: 250px;
+    max-height: 200px;
+    border-radius: 5px;
+    border: 1px solid var(--card-border);
+    display: none; /* Hidden until image is selected */
+    object-fit: contain;
+}
+
+#file-name {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.remove-img-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.diagnosis-result {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--light-section-bg);
+    border-radius: 8px;
+    min-height: 100px;
+    border: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--secondary-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.diagnosis-result.loading {
+    color: #6c757d;
+}
+
+.diagnosis-result.positive {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.diagnosis-result.negative {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border-color: #28a745;
+}
+
+
+/* --- Contact Form (CTA) --- */
+.contact-form {
+    max-width: 600px;
+    margin: 30px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form select,
+.contact-form textarea {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #999;
+}
+body.dark-theme .contact-form input::placeholder,
+body.dark-theme .contact-form textarea::placeholder {
+    color: #777;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.contact-form button {
+    align-self: flex-start;
+}
+
+.form-message {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: var(--dark-section-text); /* White text for dark section */
+}
+
+.form-message.success {
+    background-color: #28a745; /* Green for success */
+}
+
+.form-message.error {
+    background-color: #dc3545; /* Red for error */
+}
+
+
+/* --- Footer --- */
+footer {
+    background: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+footer a {
+    color: var(--footer-link);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 2.5em;
+    }
+
+    /* Mobile Nav */
+    .nav-links {
+        position: fixed; /* Use fixed for better mobile overlay */
+        right: 0px;
+        height: 100vh; /* Full viewport height */
+        top: 0;
+        background-color: var(--dark-section-bg); /* Use dark section bg for consistency */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Center items vertically */
+        width: 70%; /* Wider mobile menu */
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+        z-index: 999;
+    }
+
+    .nav-links li {
+        opacity: 0;
+        margin: 20px 0;
+    }
+
+    .nav-links a {
+        color: var(--dark-section-text) !important; /* Ensure white/light links for dark mobile nav */
+        font-size: 1.3em;
+    }
+
+    .burger {
+        display: flex;
+        margin-left: auto; /* Push burger to the right if theme toggle is there */
+    }
+
+    .nav-active {
+        transform: translateX(0%);
+    }
+
+    /* Burger Animation */
+    .toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .toggle .line2 {
+        opacity: 0;
+    }
+    .toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .stat-box {
+        min-width: unset;
+        width: 100%;
+    }
+    
+    .tech-item {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .theme-toggle {
+        order: 1; /* Place theme toggle first on mobile */
+    }
+    header .container {
+        flex-wrap: wrap; /* Allow items to wrap */
+        justify-content: space-between;
+    }
+    .logo {
+        order: 2; /* Place logo after theme toggle */
+    }
+    nav {
+        order: 3; /* Place nav container last for burger */
+    }
+}
+
+/* Keyframe for fading in nav links */
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}

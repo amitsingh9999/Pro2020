@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepLearn Lungs | AI-Powered COPD Detection</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">DeepLearn Lungs</h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#benefits">Benefits</a></li>
+                    <li><a href="#diagnosis">Diagnosis</a></li>
+                    <li><a href="#contact" class="btn-secondary">Contact</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+            <button id="theme-toggle" class="theme-toggle">🌙</button>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Revolutionizing COPD Diagnostics with *Deep Learning*</h2>
+                <p>Advanced AI for early and accurate Chronic Obstructive Pulmonary Disease detection from medical images.</p>
+                <a href="#diagnosis" class="btn-primary">Start Diagnosis Now</a>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="about" class="section">
+        <div class="container">
+            <h3>&#128174; The Challenge, Our Solution</h3>
+            <p>COPD affects millions globally. Traditional diagnostic methods can be subjective and time-consuming. We introduce a state-of-the-art Convolutional Neural Network (CNN) trained on extensive lung imaging data to provide fast, objective, and highly accurate screening for COPD-related changes.</p>
+            <div class="stat-boxes">
+                <div class="stat-box">95%+ Accuracy</div>
+                <div class="stat-box">Sub-second Analysis</div>
+                <div class="stat-box">Non-invasive Screening</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technology" class="section bg-light">
+        <div class="container">
+            <h3>&#129504; How It Works: The Deep Learning Edge</h3>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <h4>1. Data Preprocessing</h4>
+                    <p>Standardization and normalization of high-resolution CT scans or Chest X-rays for optimal input.</p>
+                </div>
+                <div class="tech-item">
+                    <h4>2. Model Inference</h4>
+                    <p>Proprietary ResNet-based architecture analyzes features like air trapping and emphysema patterns.</p>
+                </div>
+                <div class="tech-item">
+                    <h4>3. Predictive Output</h4>
+                    <p>Delivers an instant risk score and localization heatmaps for potential disease areas.</p>
+                </div>
+            </div>
+            <p class="citation">Model Performance: Our system demonstrates superior AUC metrics compared to baseline models, validated on international clinical datasets.</p>
+        </div>
+    </section>
+
+    <section id="benefits" class="section">
+        <div class="container">
+            <h3>&#127760; Benefits for Clinicians and Patients</h3>
+            <ul class="benefit-list">
+                <li>Earlier Intervention: Detect subtle signs of COPD at Stage I, enabling prompt treatment.</li>
+                <li>Reduced Workload: Automate the initial screening process for radiologists and pulmonologists.</li>
+                <li>Consistency: Eliminate human variability with a standardized, objective AI assessment.</li>
+                <li>Accessibility: Potential for deployment in low-resource settings via cloud-based API.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="diagnosis" class="section bg-light">
+        <div class="container">
+            <h3>&#128247; Upload Your Image for Diagnosis</h3>
+            <p class="section-description">Experience instant, AI-powered analysis. Upload a chest X-ray or CT scan to get a preliminary assessment for COPD indicators.</p>
+            <div class="upload-area">
+                <div id="drop-area" class="drop-area">
+                    <input type="file" id="file-input" accept=".jpg,.jpeg,.png,.dcm" hidden>
+                    <p>Drag & Drop your image here or <span class="upload-link">Click to Upload</span></p>
+                    <p class="file-info">Supported formats: JPG, PNG, DCM</p>
+                </div>
+                <div id="image-preview" class="image-preview">
+                    <img id="preview-img" src="" alt="Image Preview">
+                    <span id="file-name">No file chosen</span>
+                    <button id="remove-img-btn" class="remove-img-btn" style="display: none;">Remove Image</button>
+                </div>
+                <button id="diagnose-btn" class="btn-primary" disabled>Diagnose Image</button>
+                <div id="diagnosis-result" class="diagnosis-result">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="cta bg-dark">
+        <div class="container">
+            <h3>Partner with Us for Smarter Healthcare</h3>
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Professional Email" required>
+                <select required>
+                    <option value="">I am a...</option>
+                    <option value="clinician">Clinician/Physician</option>
+                    <option value="researcher">Researcher</option>
+                    <option value="hospital-admin">Hospital Administrator</option>
+                    <option value="other">Other</option>
+                </select>
+                <textarea placeholder="Tell us about your organization and needs..."></textarea>
+                <button type="submit" class="btn-primary">Get Started</button>
+            </form>
+            <div id="formMessage" class="form-message"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DeepLearn Lungs. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
